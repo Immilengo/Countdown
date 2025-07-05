@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contagem Regressiva</title>
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      display: flex;
+      gap: 20px;
+      font-size: 3rem;
+    }
+
+    .timer div {
+      text-align: center;
+    }
+
+    .label {
+      font-size: 1rem;
+      color: #bbbbbb;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contagem Regressiva para o Ano Novo!</h1>
+  <div class="timer" id="countdown">
+    <div>
+      <div id="days">00</div>
+      <div class="label">Dias</div>
+    </div>
+    <div>
+      <div id="hours">00</div>
+      <div class="label">Horas</div>
+    </div>
+    <div>
+      <div id="minutes">00</div>
+      <div class="label">Minutos</div>
+    </div>
+    <div>
+      <div id="seconds">00</div>
+      <div class="label">Segundos</div>
+    </div>
+  </div>
+
+  <script>
+    // Define a data alvo (Ano Novo)
+    const targetDate = new Date("Jul 7, 2025 18:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "🎉 Feliz Ano Novo!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").textContent = String(days).padStart(2, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    // Atualiza a cada segundo
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Chamada inicial
+  </script>
+</body>
+</html>
